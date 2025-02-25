@@ -17,7 +17,15 @@ const MovieCard = ({
 }: Props) => {
   return (
     <div className="movie-card">
-      <img src={`https://image.tmdb.org/t/p/w500/${poster_path}`} alt={title} />
+      <img
+        src={
+          poster_path
+            ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+            : "public/no-img.jpg"
+        }
+        alt={title}
+        loading="lazy"
+      />
       <div className="mt-4">
         <h3 className="text-white">{title}</h3>
 

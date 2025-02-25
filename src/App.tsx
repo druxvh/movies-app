@@ -2,20 +2,35 @@ import { useEffect, useState } from "react";
 import Search from "./components/Search";
 import Spinner from "./components/Spinner";
 import MovieCard, { Movie } from "./components/MovieCard";
+import { useDebounce } from "react-use";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [movieList, setMovieList] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>("");
+
+  // debounce search term
+  useDebounce(
+    () => {
+      setDebouncedSearchTerm(searchTerm);
+    },
+    1000,
+    [searchTerm]
+  );
 
   // fetch movies func
-  const fetchMovies = async () => {
+  const fetchMovies = async (query: string) => {
     setIsLoading(true);
     try {
-      const url = `${
-        import.meta.env.VITE_TMDB_BASE_URL
-      }/discover/movie?sort_by=popularity.desc`;
+      const url = query
+        ? `${
+            import.meta.env.VITE_TMDB_BASE_URL
+          }/search/movie?query=${encodeURIComponent(query)}`
+        : `${
+            import.meta.env.VITE_TMDB_BASE_URL
+          }/discover/movie?sort_by=popularity.desc`;
 
       const options = {
         method: "GET",
@@ -52,8 +67,8 @@ const App = () => {
 
   // fetch call on first load
   useEffect(() => {
-    fetchMovies();
-  }, []);
+    fetchMovies(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
 
   return (
     <main>
