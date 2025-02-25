@@ -1,11 +1,11 @@
 import React from "react";
 
-type Props = {
+interface Props {
   searchTerm: string;
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-};
+}
 
-const Search: React.FC<Props> = ({ searchTerm, setSearchTerm }) => {
+const Search = ({ searchTerm, setSearchTerm }: Props) => {
   return (
     <div className="search">
       <div>
