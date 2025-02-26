@@ -16,15 +16,13 @@
   --font-dm-sans: DM Sans, sans-serif;
 
   --breakpoint-xs: 480px;
-
-  --background-image-hero-pattern: url("/hero-bg.png");
 }
 
 @layer base {
   body {
     font-family: "DM Sans", serif;
     font-optical-sizing: auto;
-    background: #030014;
+    background: #010007;
   }
 
   h1 {
@@ -50,7 +48,7 @@
 
 @layer components {
   .pattern {
-    @apply bg-hero-pattern w-screen h-screen bg-center bg-cover absolute z-0;
+    @apply  w-screen h-screen bg-center bg-cover absolute z-0;
   }
 
   .wrapper {

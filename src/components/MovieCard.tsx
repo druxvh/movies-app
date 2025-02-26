@@ -1,12 +1,4 @@
-export interface Movie {
-  id?: number;
-  title?: string;
-  poster_path?: string;
-  vote_average?: number;
-  release_date?: string;
-  adult?: boolean;
-  original_language?: string;
-}
+import { Movie } from "../types";
 
 interface Props {
   movie: Movie;
